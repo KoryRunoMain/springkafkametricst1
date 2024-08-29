@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MetricsProducerMicroservice" />
+        <module name="coreMetric" />
         <module name="MetricsConsumerMicroservice" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MetricsConsumerMicroservice" options="-parameters" />
       <module name="MetricsProducerMicroservice" options="-parameters" />
+      <module name="coreMetric" options="-parameters" />
       <module name="metrics-consumer" options="-parameters" />
       <module name="metrics-producer" options="-parameters" />
     </option>

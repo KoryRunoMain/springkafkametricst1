@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/metrics-producer/pom.xml" />
         <option value="$PROJECT_DIR$/MetricsConsumerMicroservice/pom.xml" />
         <option value="$PROJECT_DIR$/MetricsProducerMicroservice/pom.xml" />
+        <option value="$PROJECT_DIR$/coreMetric/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
