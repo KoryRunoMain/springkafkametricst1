@@ -56,7 +56,7 @@ public class KafkaConfig {
                 .build();
     }
 
-    private Map<String, Object> producerConfigs() {
+    public Map<String, Object> producerConfigs() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
@@ -72,12 +72,12 @@ public class KafkaConfig {
     }
 
     @Bean
-    private ProducerFactory<String, MetricProducerEvent> producerFactory() {
+    public ProducerFactory<String, MetricProducerEvent> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    private KafkaTemplate<String, MetricProducerEvent> kafkaTemplate() {
+    public KafkaTemplate<String, MetricProducerEvent> kafkaTemplate() {
         return new KafkaTemplate<String, MetricProducerEvent>(producerFactory());
     }
 
