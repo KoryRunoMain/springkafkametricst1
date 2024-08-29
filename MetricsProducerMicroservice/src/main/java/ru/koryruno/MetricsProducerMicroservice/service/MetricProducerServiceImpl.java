@@ -25,8 +25,8 @@ public class MetricProducerServiceImpl implements MetricProducerService {
 
     @Override
     public String sendMetric(MetricProducerDto metricProducerDto) {
-//        String metricId = UUID.randomUUID().toString();
-        MetricProducerEvent metricProducerEvent = MetricMapper.toMetricEvent(metricProducerDto);
+        String metricId = UUID.randomUUID().toString();
+        MetricProducerEvent metricProducerEvent = MetricMapper.toMetricEvent(metricId, metricProducerDto);
 
         CompletableFuture<SendResult<String, MetricProducerEvent>> future = kafkaTemplate
                 .send(metricTopic, metricProducerEvent.getId(), metricProducerEvent);
@@ -39,6 +39,6 @@ public class MetricProducerServiceImpl implements MetricProducerService {
             }
         });
 
-        return metricProducerEvent.getId();
+        return metricId;
     }
 }
