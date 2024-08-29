@@ -2,10 +2,10 @@ package ru.koryruno.coreMetric;
 
 public class MetricProducerEvent {
 
-    private String id;
-    private String name;
-    private String value;
-    private String timestamp;
+    public String id;
+    public String name;
+    public String value;
+    public String timestamp;
 
     public MetricProducerEvent() {}
 
@@ -47,4 +47,5 @@ public class MetricProducerEvent {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
 }

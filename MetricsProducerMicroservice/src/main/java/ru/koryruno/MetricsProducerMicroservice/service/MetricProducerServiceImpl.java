@@ -7,8 +7,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import ru.koryruno.MetricsProducerMicroservice.model.MetricMapper;
-import ru.koryruno.MetricsProducerMicroservice.model.MetricProducerEvent;
 import ru.koryruno.MetricsProducerMicroservice.model.dto.MetricProducerDto;
+import ru.koryruno.coreMetric.MetricProducerEvent;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -25,9 +25,8 @@ public class MetricProducerServiceImpl implements MetricProducerService {
 
     @Override
     public String sendMetric(MetricProducerDto metricProducerDto) {
-        String metricId = UUID.randomUUID().toString();
+//        String metricId = UUID.randomUUID().toString();
         MetricProducerEvent metricProducerEvent = MetricMapper.toMetricEvent(metricProducerDto);
-        metricProducerEvent.setId(metricId);
 
         CompletableFuture<SendResult<String, MetricProducerEvent>> future = kafkaTemplate
                 .send(metricTopic, metricProducerEvent.getId(), metricProducerEvent);
@@ -40,6 +39,6 @@ public class MetricProducerServiceImpl implements MetricProducerService {
             }
         });
 
-        return metricId;
+        return metricProducerEvent.getId();
     }
 }

@@ -1,6 +1,9 @@
 package ru.koryruno.MetricsProducerMicroservice.model;
 
 import ru.koryruno.MetricsProducerMicroservice.model.dto.MetricProducerDto;
+import ru.koryruno.coreMetric.MetricProducerEvent;
+
+import java.util.UUID;
 
 public class MetricMapper {
 
@@ -13,11 +16,12 @@ public class MetricMapper {
     }
 
     public static MetricProducerEvent toMetricEvent(MetricProducerDto metricDto) {
-        return MetricProducerEvent.builder()
-                .name(metricDto.getName())
-                .value(metricDto.getValue())
-                .timestamp(metricDto.getTimestamp())
-                .build();
+        MetricProducerEvent metricProducerEvent = new MetricProducerEvent();
+        metricProducerEvent.setId(UUID.randomUUID().toString());
+        metricProducerEvent.setName(metricDto.getName());
+        metricProducerEvent.setValue(metricDto.getValue());
+        metricProducerEvent.setTimestamp(metricDto.getTimestamp());
+        return metricProducerEvent;
     }
 
     public static MetricProducerDto toMetricDto(MetricProducer metric) {
