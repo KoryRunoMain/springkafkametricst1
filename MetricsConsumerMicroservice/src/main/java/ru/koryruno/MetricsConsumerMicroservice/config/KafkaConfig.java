@@ -1,6 +1,5 @@
 package ru.koryruno.MetricsConsumerMicroservice.config;
 
-import lombok.NonNull;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -36,7 +35,6 @@ public class KafkaConfig {
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> configs = new HashMap<>();
-
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -53,7 +51,6 @@ public class KafkaConfig {
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> configs = new HashMap<>();
-
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -73,8 +70,8 @@ public class KafkaConfig {
 
         DeadLetterPublishingRecoverer dltRecover = new DeadLetterPublishingRecoverer(kafkaTemplate);
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(dltRecover, new FixedBackOff(1000L, 2));
-        errorHandler.addNotRetryableExceptions(NonRetryableException.class);
-        errorHandler.addRetryableExceptions(RetryableException.class);
+//        errorHandler.addNotRetryableExceptions(NonRetryableException.class);
+//        errorHandler.addRetryableExceptions(RetryableException.class);
 
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);

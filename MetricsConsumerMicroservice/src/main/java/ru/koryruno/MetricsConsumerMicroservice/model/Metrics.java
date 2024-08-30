@@ -23,13 +23,13 @@ public class Metrics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "metrics_name")
+    @Column(name = "metric_name")
     private String name;
 
-    @Column(name = "metrics_value")
+    @Column(name = "metric_value")
     private String value;
 
-    @Column(name = "metrics_timestamp")
+    @Column(name = "metric_timestamp")
     private String timestamp;
 
 }

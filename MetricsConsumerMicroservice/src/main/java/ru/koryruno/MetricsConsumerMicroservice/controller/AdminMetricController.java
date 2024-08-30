@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping
 @Slf4j
 @RequiredArgsConstructor
-public class MetricConsumerController {
+public class AdminMetricController {
 
     private final MetricConsumerService metricConsumerService;
 

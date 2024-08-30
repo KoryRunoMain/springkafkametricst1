@@ -21,11 +21,7 @@ public class MetricConsumerServiceImpl implements MetricConsumerService {
 
     @Override
     public void saveMetrics(MetricProducerEvent metricProducerEvent) {
-        Metrics metrics = Metrics.builder()
-                .name(metricProducerEvent.getName())
-                .value(metricProducerEvent.getValue())
-                .timestamp(metricProducerEvent.getTimestamp())
-                .build();
+        Metrics metrics = MetricsMapper.tiMetrics(metricProducerEvent);
 
         metricsRepository.save(metrics);
         log.info("Successfully saved metrics name: {}, with incoming id: {}", metrics.getName(), metrics.getId());
