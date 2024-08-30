@@ -20,8 +20,6 @@ import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.util.backoff.FixedBackOff;
-import ru.koryruno.MetricsConsumerMicroservice.exception.NonRetryableException;
-import ru.koryruno.MetricsConsumerMicroservice.exception.RetryableException;
 
 import java.util.HashMap;
 import java.util.Map;
