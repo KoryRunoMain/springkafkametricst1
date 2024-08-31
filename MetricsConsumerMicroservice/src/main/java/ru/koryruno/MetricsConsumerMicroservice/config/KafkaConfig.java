@@ -33,15 +33,14 @@ public class KafkaConfig {
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> configs = new HashMap<>();
-        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         configs.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
-        configs.put(JsonDeserializer.TRUSTED_PACKAGES,
-                environment.getProperty("spring.kafka.consumer.properties.spring.json.trusted.packages"));
-        configs.put(ConsumerConfig.GROUP_ID_CONFIG,
-                environment.getProperty("spring.kafka.consumer.group-id"));
+        configs.put(JsonDeserializer.VALUE_DEFAULT_TYPE, environment.getProperty("default.value.type"));
+        configs.put(JsonDeserializer.USE_TYPE_INFO_HEADERS, false);
+        configs.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, environment.getProperty("spring.kafka.consumer.group-id"));
 
         return new DefaultKafkaConsumerFactory<>(configs);
     }
@@ -68,8 +67,6 @@ public class KafkaConfig {
 
         DeadLetterPublishingRecoverer dltRecover = new DeadLetterPublishingRecoverer(kafkaTemplate);
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(dltRecover, new FixedBackOff(1000L, 2));
-//        errorHandler.addNotRetryableExceptions(NonRetryableException.class);
-//        errorHandler.addRetryableExceptions(RetryableException.class);
 
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);

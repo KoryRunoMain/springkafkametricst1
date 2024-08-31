@@ -8,8 +8,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
+import ru.koryruno.MetricsConsumerMicroservice.model.MetricProducerEvent;
 import ru.koryruno.MetricsConsumerMicroservice.service.MetricConsumerService;
-import ru.koryruno.coreMetric.MetricProducerEvent;
 
 @Component
 @Slf4j
@@ -22,8 +22,11 @@ public class MetricConsumerEventHandler {
     @KafkaHandler
     public void handle(MetricProducerEvent metricProducerEvent) {
         metricConsumerService.saveMetrics(metricProducerEvent);
-
-        log.info("Received event: {}", metricProducerEvent.getName());
+        log.info("Saved event: {}, {}, {}, {}",
+                metricProducerEvent.getId(),
+                metricProducerEvent.getName(),
+                metricProducerEvent.getValue(),
+                metricProducerEvent.getTimestamp());
     }
 
     @DltHandler

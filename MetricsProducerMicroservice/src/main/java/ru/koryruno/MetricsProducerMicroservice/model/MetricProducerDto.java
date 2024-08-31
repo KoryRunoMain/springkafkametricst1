@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MetricProducer {
+public class MetricProducerDto {
 
-    private String id;
     private String name;
     private String value;
     private String timestamp;

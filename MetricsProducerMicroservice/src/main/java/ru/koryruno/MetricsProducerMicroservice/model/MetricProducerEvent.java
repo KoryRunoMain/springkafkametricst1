@@ -1,4 +1,4 @@
-package ru.koryruno.MetricsProducerMicroservice.model.dto;
+package ru.koryruno.MetricsProducerMicroservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MetricProducerDto {
+public class MetricProducerEvent {
 
+    private String id;
     private String name;
     private String value;
     private String timestamp;

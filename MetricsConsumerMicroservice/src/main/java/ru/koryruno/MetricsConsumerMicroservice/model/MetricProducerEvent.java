@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MetricResponse {
+public class MetricProducerEvent {
 
     private String id;
     private String name;

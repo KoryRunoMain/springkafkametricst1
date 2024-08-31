@@ -21,11 +21,11 @@ public class AdminMetricController {
 
     private final MetricConsumerService metricConsumerService;
 
-    @GetMapping(path = "/metrics/{id}")
+    @GetMapping(path = "/metrics/{metricId}")
     @ResponseStatus(HttpStatus.OK)
-    public MetricResponse getMetrics(@PathVariable Long id) {
-        log.info("Successfully get metrics by id: " + id);
-        return metricConsumerService.getMetricsById(id);
+    public MetricResponse getMetrics(@PathVariable String metricId) {
+        log.info("Successfully get metrics by id: " + metricId);
+        return metricConsumerService.getMetricsById(metricId);
     }
 
     @GetMapping(path = "/metrics")

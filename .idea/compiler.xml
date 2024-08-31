@@ -8,11 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MetricsProducerMicroservice" />
-        <module name="coreMetric" />
         <module name="MetricsConsumerMicroservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="coreMetric" target="17" />
       <module name="metrics-consumer" target="17" />
       <module name="metrics-producer" target="17" />
     </bytecodeTargetLevel>

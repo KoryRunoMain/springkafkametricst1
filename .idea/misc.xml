@@ -15,6 +15,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/../metrics-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/coreMetric/pom.xml" />
         <option value="$PROJECT_DIR$/metrics-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/metrics-producer/pom.xml" />
       </set>

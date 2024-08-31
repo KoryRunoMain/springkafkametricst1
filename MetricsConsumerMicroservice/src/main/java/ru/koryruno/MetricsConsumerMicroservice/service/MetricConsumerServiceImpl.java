@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.koryruno.MetricsConsumerMicroservice.exception.NotFoundException;
+import ru.koryruno.MetricsConsumerMicroservice.model.MetricProducerEvent;
+import ru.koryruno.MetricsConsumerMicroservice.model.MetricDocument;
+import ru.koryruno.MetricsConsumerMicroservice.model.MetricMapper;
 import ru.koryruno.MetricsConsumerMicroservice.model.MetricResponse;
-import ru.koryruno.MetricsConsumerMicroservice.model.Metrics;
-import ru.koryruno.MetricsConsumerMicroservice.model.MetricsMapper;
-import ru.koryruno.MetricsConsumerMicroservice.repository.MetricsRepository;
-import ru.koryruno.coreMetric.MetricProducerEvent;
+import ru.koryruno.MetricsConsumerMicroservice.repository.MetricsDocumentRepository;
 
 import java.util.List;
 
@@ -17,27 +17,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MetricConsumerServiceImpl implements MetricConsumerService {
 
-    private final MetricsRepository metricsRepository;
+    private final MetricsDocumentRepository metricsDocumentRepository;
 
     @Override
     public void saveMetrics(MetricProducerEvent metricProducerEvent) {
-        Metrics metrics = MetricsMapper.tiMetrics(metricProducerEvent);
+        MetricDocument document = MetricMapper.toMetricDocument(metricProducerEvent);
 
-        metricsRepository.save(metrics);
-        log.info("Successfully saved metrics name: {}, with incoming id: {}", metrics.getName(), metrics.getId());
+        metricsDocumentRepository.save(document);
+        log.info("Successfully saved metric: " + document.getName());
     }
 
     @Override
-    public MetricResponse getMetricsById(Long metricId) {
-        return MetricsMapper.toMetricResponse(metricsRepository.findById(metricId)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Not Found metrics with id: %d", metricId))));
+    public MetricResponse getMetricsById(String metricId) {
+        return MetricMapper.toMetricResponse(
+                metricsDocumentRepository.findById(metricId)
+                        .orElseThrow(() -> new NotFoundException("Not Found metric with id: " + metricId)));
     }
 
     @Override
     public List<MetricResponse> getAllMetrics() {
-        return metricsRepository.findAll().stream()
-                .map(MetricsMapper::toMetricResponse)
+        return metricsDocumentRepository.findAll().stream()
+                .map(MetricMapper::toMetricResponse)
                 .toList();
     }
 
