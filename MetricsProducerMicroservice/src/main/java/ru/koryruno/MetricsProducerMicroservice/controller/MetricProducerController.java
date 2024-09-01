@@ -21,7 +21,7 @@ public class MetricProducerController {
             metricStatService.collectAndSendMetrics();
             return ResponseEntity.status(HttpStatus.OK).body("Successfully send metrics");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send metrics");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to sent metrics");
         }
     }
 

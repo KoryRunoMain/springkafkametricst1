@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.koryruno.MetricsProducerMicroservice.exception.MetricSendException;
-import ru.koryruno.MetricsProducerMicroservice.model.MetricProducerDto;
 import ru.koryruno.MetricsProducerMicroservice.model.MetricProducerEvent;
 
 import java.time.Instant;
@@ -29,9 +27,6 @@ public class MetricStatService {
     @Value("${kafka.topic.metrics}")
     private String metricTopic;
 
-//    private final MetricProducerServiceImpl metricsProducerService;
-
-//    @Scheduled(fixedRate = 10000)
     public void collectAndSendMetrics() {
         log.info("Scheduled task is running");
 
@@ -77,7 +72,6 @@ public class MetricStatService {
                     .timestamp(Instant.now().toString())
                     .build();
 
-//            metricsProducerService.sendMetric(metricEvent);
             sendMetricsToKafka(metricEvent);
 
         } catch (Exception e) {
