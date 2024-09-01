@@ -18,6 +18,13 @@ import ru.koryruno.MetricsProducerMicroservice.model.MetricProducerEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Kafka configuration class to set up Kafka producers. Also create Kafka-Topic.
+ *
+ * <p>
+ * This class configures Kafka producer settings and defines Kafka topics.
+ * </p>
+ */
 @Configuration
 public class KafkaConfig {
 
@@ -27,6 +34,15 @@ public class KafkaConfig {
     @Value("${kafka.topic.metrics}")
     private String metricTopic;
 
+    /**
+     * Creates a Kafka topic with specified configurations.
+     * <p>
+     * The topic is configured with 3 partitions and 3 replicas. The topic also has a configuration
+     * to ensure a minimum of 2 replicas are in synchronized state.
+     * </p>
+     *
+     * @return a {@link NewTopic} object representing the created topic
+     */
     @Bean
     public NewTopic createTopic() {
         return TopicBuilder.name(metricTopic)
@@ -36,6 +52,11 @@ public class KafkaConfig {
                 .build();
     }
 
+    /**
+     * Configures the Kafka producer settings.
+     *
+     * @return a {@link Map} containing Kafka producer configuration properties
+     */
     public Map<String, Object> producerConfigs() {
         Map<String, Object> configProps = new HashMap<>();
 
@@ -58,11 +79,27 @@ public class KafkaConfig {
         return configProps;
     }
 
+    /**
+     * Configures the Kafka producer factory.
+     * <p>
+     * This method creates a {@link ProducerFactory} configured with the settings from {@link #producerConfigs()}.
+     * </p>
+     *
+     * @return a {@link ProducerFactory} for creating Kafka producers
+     */
     @Bean
     public ProducerFactory<String, MetricProducerEvent> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
+    /**
+     * Configures the Kafka template for sending messages.
+     * <p>
+     * This method creates a {@link KafkaTemplate} configured with the {@link ProducerFactory} created by {@link #producerFactory()}.
+     * </p>
+     *
+     * @return a {@link KafkaTemplate} for sending Kafka messages
+     */
     @Bean
     public KafkaTemplate<String, MetricProducerEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());

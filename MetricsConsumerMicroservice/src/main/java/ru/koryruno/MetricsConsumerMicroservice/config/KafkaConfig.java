@@ -24,12 +24,23 @@ import org.springframework.util.backoff.FixedBackOff;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Kafka configuration class to set up Kafka consumers.
+ * <p>
+ * This class configures Kafka consumer and producer factories, Kafka templates, and error handling mechanisms.
+ * </p>
+ */
 @Configuration
 public class KafkaConfig {
 
     @Autowired
     public Environment environment;
 
+    /**
+     * Configures the Kafka consumer factory.
+     *
+     * @return a {@link ConsumerFactory} for Kafka consumers
+     */
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> configs = new HashMap<>();
@@ -45,6 +56,11 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(configs);
     }
 
+    /**
+     * Configures the Kafka producer factory.
+     *
+     * @return a {@link ProducerFactory} for Kafka producers
+     */
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> configs = new HashMap<>();
@@ -56,11 +72,24 @@ public class KafkaConfig {
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
+    /**
+     * Configures the Kafka template for sending messages.
+     *
+     * @param producerFactory the {@link ProducerFactory} used to create Kafka producers
+     * @return a {@link KafkaTemplate} for sending Kafka messages
+     */
     @Bean
     public KafkaTemplate<String, Object> kafkaTemplate(ProducerFactory<String, Object> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
     }
 
+    /**
+     * Configures the Kafka listener container factory with error handling.
+     *
+     * @param consumerFactory the {@link ConsumerFactory} used to create Kafka consumers
+     * @param kafkaTemplate   the {@link KafkaTemplate} used for sending messages to dead letter topics
+     * @return a {@link ConcurrentKafkaListenerContainerFactory} with error handling
+     */
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
             ConsumerFactory<String, Object> consumerFactory, KafkaTemplate kafkaTemplate) {

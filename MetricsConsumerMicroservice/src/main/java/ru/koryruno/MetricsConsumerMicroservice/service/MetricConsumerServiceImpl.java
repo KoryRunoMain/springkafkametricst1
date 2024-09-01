@@ -12,6 +12,16 @@ import ru.koryruno.MetricsConsumerMicroservice.repository.MetricsDocumentReposit
 
 import java.util.List;
 
+/**
+ * Service implementation for handling metric data received from Kafka.
+ *
+ * <p>
+ * This service provides functionality for saving metrics to a database
+ * and retrieving them by ID or all at once.
+ * It utilizes the {@link MetricsDocumentRepository} to interact with the database
+ * and {@link MetricMapper} to map between different data models.
+ * </p>
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
