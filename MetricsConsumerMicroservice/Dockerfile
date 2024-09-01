@@ -1,4 +1,8 @@
-FROM openjdk:17-jdk-slim
-COPY target/metrics-consumer-microservice.jar app.jar
+FROM maven:3.8.4-openjdk-17 AS build
+COPY pom.xml .
+COPY . .
+RUN mvn clean package -DskipTests
+FROM openjdk:17-jdk-alpine
+COPY --from=build /target/metrics-consumer-microservice.jar app.jar
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
