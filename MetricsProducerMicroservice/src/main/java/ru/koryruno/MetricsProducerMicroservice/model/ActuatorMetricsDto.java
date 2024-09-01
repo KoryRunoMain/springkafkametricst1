@@ -1,4 +1,4 @@
-package ru.koryruno.MetricsConsumerMicroservice.model;
+package ru.koryruno.MetricsProducerMicroservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MetricProducerEvent {
+public class ActuatorMetricsDto {
 
     private String name;
     private String value;

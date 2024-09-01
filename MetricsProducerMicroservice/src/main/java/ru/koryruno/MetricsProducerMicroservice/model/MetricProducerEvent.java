@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MetricProducerEvent {
 
-    private String id;
     private String name;
     private String value;
     private String timestamp;

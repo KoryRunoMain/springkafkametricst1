@@ -4,7 +4,6 @@ public class MetricMapper {
 
     public static MetricDocument toMetricDocument(MetricProducerEvent metricProducerEvent) {
         return MetricDocument.builder()
-                .id(metricProducerEvent.getId())
                 .name(metricProducerEvent.getName())
                 .value(metricProducerEvent.getValue())
                 .timestamp(metricProducerEvent.getTimestamp())

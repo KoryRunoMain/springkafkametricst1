@@ -22,9 +22,8 @@ public class MetricConsumerServiceImpl implements MetricConsumerService {
     @Override
     public void saveMetrics(MetricProducerEvent metricProducerEvent) {
         MetricDocument document = MetricMapper.toMetricDocument(metricProducerEvent);
-
         metricsDocumentRepository.save(document);
-        log.info("Successfully saved metric: " + document.getName());
+        log.info("Successfully saved metric name {}", document.getName());
     }
 
     @Override

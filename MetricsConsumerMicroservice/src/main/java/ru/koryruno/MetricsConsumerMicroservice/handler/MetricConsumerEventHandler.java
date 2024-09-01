@@ -21,12 +21,12 @@ public class MetricConsumerEventHandler {
 
     @KafkaHandler
     public void handle(MetricProducerEvent metricProducerEvent) {
+        if (metricProducerEvent == null) {
+            log.info("Metric is null");
+            return;
+        }
         metricConsumerService.saveMetrics(metricProducerEvent);
-        log.info("Saved event: {}, {}, {}, {}",
-                metricProducerEvent.getId(),
-                metricProducerEvent.getName(),
-                metricProducerEvent.getValue(),
-                metricProducerEvent.getTimestamp());
+        log.info("Get event name: {}", metricProducerEvent.getName());
     }
 
     @DltHandler
