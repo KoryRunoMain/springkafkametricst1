@@ -1,4 +1,4 @@
-## springbootsecurityt1
+## springkafkametricst1
 
 ### Описание проекта
 Веб-приложение для отслеживания метрик производительности с использованием Spring Kafka.
