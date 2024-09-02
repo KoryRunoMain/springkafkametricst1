@@ -35,9 +35,9 @@ public class MetricStatServiceTest {
     @InjectMocks
     private MetricStatServiceImpl metricStatService;
 
-    private static final String ACTUATOR_URI = "http://localhost:9091/actuator/metrics";
-    private static final String ACTUATOR_URI_WITH_METRIC_1 = "http://localhost:9091/actuator/metrics/metric1";
-    private static final String ACTUATOR_URI_WITH_METRIC_2 = "http://localhost:9091/actuator/metrics/metric2";
+    private static final String ACTUATOR_URI = "http://localhost:8082/actuator/metrics";
+    private static final String ACTUATOR_URI_WITH_METRIC_1 = "http://localhost:8082/actuator/metrics/metric1";
+    private static final String ACTUATOR_URI_WITH_METRIC_2 = "http://localhost:8082/actuator/metrics/metric2";
 
     @Value("${kafka.topic.metrics}")
     private String metricTopic;

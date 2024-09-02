@@ -30,12 +30,15 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class MetricStatServiceImpl implements MetricStatService {
 
-    private static final String ACTUATOR_METRICS_URI = "http://localhost:9091/actuator/metrics";
-    private final KafkaTemplate<String, MetricProducerEvent> kafkaTemplate;
-    private final RestTemplate restTemplate;
-
     @Value("${kafka.topic.metrics}")
     private String metricTopic;
+
+    @Value("${server.port}")
+    private String producerPort;
+
+    private final String ACTUATOR_METRICS_URI = "http://localhost:8082/actuator/metrics";
+    private final KafkaTemplate<String, MetricProducerEvent> kafkaTemplate;
+    private final RestTemplate restTemplate;
 
     /**
      * Collects metrics from the actuator endpoint and sends them to a Kafka topic.

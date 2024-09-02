@@ -1,8 +1,12 @@
-FROM maven:3.8.4-openjdk-17 AS build
-COPY pom.xml .
-COPY . .
-RUN mvn clean package -DskipTests
+FROM maven:3.8.6-amazoncorretto-17 AS build
+COPY pom.xml /build/
+WORKDIR /build/
+RUN mvn dependency:go-offline
+COPY src /build/src/
+RUN mvn package -DskipTests
+
+#Run stage
 FROM openjdk:17-jdk-alpine
-COPY --from=build /target/metrics-consumer-microservice.jar app.jar
-EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ARG JAR_FILE=/build/target/*.jar
+COPY --from=build $JAR_FILE /opt/MetricsConsumerMicroservice/app.jar
+ENTRYPOINT ["java", "-jar", "/opt/MetricsConsumerMicroservice/app.jar"]

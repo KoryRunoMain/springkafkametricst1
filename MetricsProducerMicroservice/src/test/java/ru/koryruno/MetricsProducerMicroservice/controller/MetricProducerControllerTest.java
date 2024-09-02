@@ -32,7 +32,7 @@ class MetricProducerControllerTest {
         mockMvc.perform(get(BASE_URI_FOR_METRICS)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Successfully send metrics"));
+                .andExpect(content().string("Successfully sent metrics"));
     }
 
     @Test
