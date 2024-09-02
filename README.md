@@ -23,7 +23,9 @@
 * [Тех-задание](docs/OpenSchoolDz3.txt)
 
 ### API сервиса
-UI. Запустите сервис и перейдите по ссылке: [swagger-ui](http://localhost:8080/swagger-ui.html)
+UI. Запустите сервис и перейдите по ссылке.
+* MetricsProducerMicroservice [swagger-ui](http://localhost:8082/swagger-ui.html)
+* MetricsConsumerMicroservice [swagger-ui](http://localhost:8081/swagger-ui.html)
 
 * JSON файл документации:
   [springbootsecurityt1_specification](docs/springbootsecurityt1-openApi-specification.json)

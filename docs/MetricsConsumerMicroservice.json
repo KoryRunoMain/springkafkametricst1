@@ -1,0 +1,118 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MetricsConsumerMicroservice specification",
+    "description": "OpenApi documentation for T1 homework project: monitoring app with Spring Kafka",
+    "contact": {
+      "name": "Kory Runo",
+      "email": "urajimirudesu@gmail.com"
+    },
+    "version": "0.0.1-SnapShot"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Local ENV"
+    }
+  ],
+  "paths": {
+    "/metrics": {
+      "get": {
+        "tags": [
+          "admin-metric-controller"
+        ],
+        "summary": "Get All Metrics",
+        "description": "Fetches all metrics available.",
+        "operationId": "getAllMetrics",
+        "responses": {
+          "200": {
+            "description": "Metrics fetched successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetricResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}": {
+      "get": {
+        "tags": [
+          "admin-metric-controller"
+        ],
+        "summary": "Get Metric by ID",
+        "description": "Fetches a metric by its ID.",
+        "operationId": "getMetrics",
+        "parameters": [
+          {
+            "name": "metricId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metric found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Metric not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MetricResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
