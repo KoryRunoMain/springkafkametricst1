@@ -7,17 +7,15 @@
 Учебный проект по заданию от T1 образовательной школы по Java направлению.
 
 ### Стэк проекта
-* Java 17, Spring Boot (Web, Actuator, Test), Kafka, MongoDb, Docker, OpenApi (Swagger), Lombok, Junit5
+* Java 17, Spring Boot (Web, Actuator, Test), Lombok, MongoDb, Kafka, KRaft, Docker, OpenApi (Swagger), Junit5
 
 
 ### Содержание:
 1. [Техническое задание](#техническое-задание)
 2. [API сервиса](#api-сервиса)
-3. [Валидация регистрационных данных](#регистрация-пользователей-валидация)
-4. [Схема базы данных](#схема-базы-данных)
-5. [Инструкция по запуску проекта](#пошаговая-инструкция-по-установке-и-запуску-проета)
-5. [Ссылки](#ссылки)
-6. [Автор](#автор)
+3. [Инструкция по запуску проекта](#инструкция-по-установке-и-запуску-проекта)
+4. [Ссылки](#ссылки)
+5. [Автор](#автор)
 
 ### Техническое задание
 * [Тех-задание](docs/OpenSchoolDz3.txt)
@@ -27,50 +25,37 @@ UI. Запустите сервис и перейдите по ссылке.
 * MetricsProducerMicroservice [swagger-ui](http://localhost:8082/swagger-ui.html)
 * MetricsConsumerMicroservice [swagger-ui](http://localhost:8081/swagger-ui.html)
 
-* JSON файл документации:
-  [springbootsecurityt1_specification](docs/springbootsecurityt1-openApi-specification.json)
+#### JSON файл документации:
+* MetricsProducerMicroservice [producer.json](docs/MetricsProducerMicroservice.json)
+* MetricsConsumerMicroservice [consumer.json](docs/MetricsConsumerMicroservice.json)
 
 
-### Регистрация пользователей (валидация)
-* В проекте используется Spring AOP для валидации входных регистрационных данных.
-
-##### Ограничения:
-1. Логин (допускается использовать кириллицу, цифры. Остальные символы запрещены)
-2. Email (формат почтового адреса: example@example.example)
-
-
-### Схема базы данных
-![img.png](docs/schema-diagram.png)
-
-## Пошаговая инструкция по установке и запуску проета
-1. Установите Git: Если у вас еще не установлен Git, загрузите и установите его с официального сайта
-   Git: https://git-scm.com/.
-2. Клонируйте репозиторий: Откройте командную строку или терминал и выполните команду клонирования для репозитория
+### Инструкция по установке и запуску проекта
+1. Установите Git: с официального сайта: https://git-scm.com/
+2. Установите Docker c официального сайта: https://www.docker.com/
+3. Клонируйте репозиторий: Откройте командную строку или терминал и выполните команду клонирования для репозитория
    GitHub. Например:
-
 ```
-git clone https://github.com/KoryRunoMain/springbootsecurityt1.git
+git clone https://github.com/KoryRunoMain/springkafkametricst1.git
 ```
 
-3. Откройте проект в IDE: Откройте вашу среду разработки (IDE), такую как IntelliJ IDEA, Eclipse или NetBeans.
-4. Импортируйте проект как Maven проект: Если вы используете IntelliJ IDEA,
-   выберите File -> Open и выберите папку, в которую был склонирован репозиторий.
-   IntelliJ IDEA должна автоматически распознать проект как Maven проект и импортировать его.
-   В Eclipse вы можете выбрать File -> Import -> Existing Maven Projects и выбрать корневую папку проекта.
-   В NetBeans вы можете выбрать File -> Open Project и выбрать папку проекта.
-5. Запустите приложение: точка входа находится в классе "SpringbootaopApplication" помеченном аннотацией
-   @SpringBootApplication.
-   Либо запустите через Maven:
-
-```
-mvn spring-boot:run
+4. Откройте проект в IDE: Откройте вашу среду разработки (IDE), такую как IntelliJ IDEA, Eclipse или NetBeans.
+5. Запустите и соберите контейнер: точка входа называется "services" в [docker-compose.yml](docker-compose.yml)
+6. Либо запустите командой из терминала находясь в директории с файлом "docker-compose.yml":
+```   
+docker-compose up
 ```
 
 ### Ссылки
-1. Используемые зависимости: [pom.xml](pom.xml)
-2. Настройки проекта: [application.properties](src/main/resources/application.properties)
-3. Схема базы данных: [schema.sql](src/main/resources/schema.sql)
-4. Тесты: [springbootsecurityt1-test](src/test/java/ru/koryruno/springbootsecurityt1)
+1. MetricsProducerMicroservice
+- [application.properties](MetricsProducerMicroservice/src/main/resources/application.properties)
+- [test](MetricsProducerMicroservice/src/test/java/ru/koryruno/MetricsProducerMicroservice)
+- [pom.xml](MetricsProducerMicroservice/pom.xml)
+
+2. MetricsConsumerMicroservice
+- [application.properties](MetricsConsumerMicroservice/src/main/resources/application.properties)
+- [test](MetricsConsumerMicroservice/src/test/java/ru/koryruno/MetricsConsumerMicroservice)
+- [pom.xml](MetricsConsumerMicroservice/pom.xml)
 
 ### Автор
 * KoryRunoMain
