@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -11,6 +12,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="coreMetric" target="17" />
       <module name="metrics-consumer" target="17" />
       <module name="metrics-producer" target="17" />
     </bytecodeTargetLevel>
@@ -19,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MetricsConsumerMicroservice" options="-parameters" />
       <module name="MetricsProducerMicroservice" options="-parameters" />
+      <module name="coreMetric" options="-parameters" />
       <module name="metrics-consumer" options="-parameters" />
       <module name="metrics-producer" options="-parameters" />
     </option>
