@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MetricsProducerMicroservice specification",
+    "description": "OpenApi documentation for T1 homework project: monitoring app with Spring Kafka",
+    "contact": {
+      "name": "Kory Runo",
+      "email": "urajimirudesu@gmail.com"
+    },
+    "version": "0.0.1-SnapShot"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8082",
+      "description": "Local ENV"
+    }
+  ],
+  "paths": {
+    "/metrics": {
+      "get": {
+        "tags": [
+          "metric-producer-controller"
+        ],
+        "summary": "Collect and Send Metrics",
+        "description": "Collects and sends metrics, returning success or error message",
+        "operationId": "getMetrics",
+        "responses": {
+          "200": {
+            "description": "Successfully sent metrics",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to send metrics",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+
+  }
+}
